@@ -1,31 +1,116 @@
+/* General */
 html,
 body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    min-height: 100%;
 }
 
 body {
+    background-color: #f4f7f9;
+    color: #263238;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+    background-color: #263238;
+    padding: 1rem 2rem;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #80cbc4;
+}
+
+/* Main content */
+main {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 2rem;
+    width: 90%;
+}
+
+h1 {
+    color: #00695c;
+    margin-top: 0;
+}
+
+h2 {
+    color: #37474f;
+}
+
+/* Images */
+.main-logo {
+    display: block;
+    height: auto;
+    margin: 2rem auto;
+    max-width: 100%;
+}
+
+/* Organization list */
+main ul {
+    padding-left: 1.5rem;
+}
+
+main li {
+    margin-bottom: 1rem;
+}
+
+main li img {
+    height: 50px;
+    margin-right: 1rem;
+    object-fit: contain;
+    vertical-align: middle;
+    width: 100px;
+}
+
+/* Footer */
+footer {
+    color: #455a64;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
     nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+        padding: 1rem;
+    }
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+    nav ul {
+        align-items: center;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+    main {
+        margin: 1rem auto;
+        padding: 1.25rem;
+        width: 85%;
+    }
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+    main li img {
+        display: block;
+        margin-bottom: 0.5rem;
     }
 }
