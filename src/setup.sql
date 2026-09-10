@@ -58,3 +58,54 @@ VALUES
 (3, 'Clothing Donation Event', 'Collect clothing donations for people in need.', 'Eugene', '2026-10-01'),
 (3, 'School Supply Drive', 'Collect school supplies for children in local schools.', 'Gresham', '2026-10-08'),
 (3, 'Community Service Day', 'Coordinate volunteers for several community service activities.', 'Beaverton', '2026-10-15');
+
+-- ========================================
+-- Service Project Categories
+-- ========================================
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Insert sample data: Categories
+-- ========================================
+
+INSERT INTO category (name)
+VALUES
+('Community Service'),
+('Construction'),
+('Environment');
+
+-- ========================================
+-- Project Category Relationship
+-- ========================================
+
+CREATE TABLE project_category (
+    project_id INT NOT NULL REFERENCES service_project(project_id),
+    category_id INT NOT NULL REFERENCES category(category_id),
+    PRIMARY KEY (project_id, category_id)
+);
+
+-- ========================================
+-- Associate Projects with Categories
+-- ========================================
+
+INSERT INTO project_category (project_id, category_id)
+VALUES
+(1, 2),
+(2, 3),
+(3, 2),
+(4, 2),
+(5, 2),
+(6, 3),
+(7, 3),
+(8, 3),
+(9, 3),
+(10, 3),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1);
