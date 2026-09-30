@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser } from '../models/users.js';
+import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -82,21 +82,18 @@ const requireLogin = (req, res, next) => {
  * @param {string} role - The role name required (e.g., 'admin', 'user')
  * @returns {Function} Express middleware function
  */
-const requireRole = (role) => {
+const requireRole = (role, redirectPath = '/') => {
     return (req, res, next) => {
-        // Check if user is logged in first
-        if (!req.session || !req.session.user) {
-            req.flash('error', 'You must be logged in to access this page.');
+        if (!req.session.user) {
+            req.flash('error', 'Please log in to access this page.');
             return res.redirect('/login');
         }
 
-        // Check if user's role matches the required role
         if (req.session.user.role_name !== role) {
             req.flash('error', 'You do not have permission to access this page.');
-            return res.redirect('/');
+            return res.redirect(redirectPath);
         }
 
-        // User has required role, continue
         next();
     };
 };
@@ -111,6 +108,15 @@ const showDashboard = (req, res) => {
     });
 };
 
+const showUsers = async (req, res) => {
+    const users = await getAllUsers();
+
+    res.render('users', {
+        title: 'Users',
+        users
+    });
+};
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm,
@@ -119,5 +125,6 @@ export {
     processLogout,
     requireLogin,
     requireRole,
-    showDashboard
+    showDashboard,
+    showUsers
 };
