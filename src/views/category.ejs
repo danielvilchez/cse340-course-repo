@@ -8,21 +8,23 @@
         <h2>
             <%= categoryDetails.name %>
         </h2>
-        <a href="/edit-category/<%= categoryDetails.category_id %>">
-            Edit Category
-        </a>
+        <% if (user && user.role_name==='admin' ) { %>
+            <a href="/edit-category/<%= categoryDetails.category_id %>">
+                Edit Category
+            </a>
+            <% } %>
 
-        <h3>Service Projects</h3>
+                <h3>Service Projects</h3>
 
-        <ul>
-            <% projects.forEach(project=> { %>
-                <li>
-                    <a href="/project/<%= project.project_id %>">
-                        <%= project.title %>
-                    </a>
-                </li>
-                <% }) %>
-        </ul>
+                <ul>
+                    <% projects.forEach(project=> { %>
+                        <li>
+                            <a href="/project/<%= project.project_id %>">
+                                <%= project.title %>
+                            </a>
+                        </li>
+                        <% }) %>
+                </ul>
     </main>
 
     <%- include('partials/footer') %>
